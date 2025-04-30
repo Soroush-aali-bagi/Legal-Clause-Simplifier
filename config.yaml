@@ -1,0 +1,35 @@
+# Model Configuration
+model:
+  base_model: "meta-llama/Meta-Llama-3-8B"
+  adapter_path: "./models/qlora_adapter"
+  quantization: "nf4"
+  compute_dtype: "bfloat16"
+
+# Training Parameters
+training:
+  batch_size: 4
+  gradient_accumulation: 4
+  learning_rate: 2e-4
+  epochs: 3
+  lora_rank: 64
+  lora_alpha: 16
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj"]
+
+# Data Configuration
+data:
+  raw_data_dir: "./data/raw_contracts"
+  processed_dir: "./data/processed"
+  max_seq_length: 512
+  test_size: 0.1
+
+# Inference Settings
+inference:
+  max_new_tokens: 256
+  temperature: 0.3
+  top_p: 0.9
+
+# Web Interface
+web:
+  port: 8000
+  host: "0.0.0.0"
+  debug: true
